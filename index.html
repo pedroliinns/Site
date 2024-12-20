@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Um dia vou comer teu c#zinho?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 90%;
+        }
+        h1 {
+            color: #333;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-yes {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn-yes:hover {
+            background-color: #45a049;
+        }
+        .btn-no {
+            background-color: #f44336;
+            color: white;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Um dia vou comer teu c#zinho?</h1>
+        <div class="buttons">
+            <button class="btn btn-yes" onclick="onYesClick()">Sim</button>
+            <button class="btn btn-no" disabled>Não</button>
+        </div>
+    </div>
+
+    <script>
+        function onYesClick() {
+            alert("Que safada, disse sim!! 👉👈 ");
+        }
+    </script>
+</body>
+</html>
