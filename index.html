@@ -83,10 +83,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>Bora pra uma pousada amanhã?</h1>
+        <h1>Convite</h1>
         <div class="buttons-container">
             <button class="btn btn-yes" onclick="onYesClick()">Sim</button>
-            <button class="btn btn-no" id="btn-no" onclick="onNoClick()">Não</button>
+            <button class="btn btn-no" id="btn-no" ontouchstart="onNoTouch()">Não</button>
         </div>
         <div class="message" id="message"></div>
     </div>
@@ -98,11 +98,11 @@
 
         // Função para o botão "Sim"
         function onYesClick() {
-            alert("Bora então hihihi ❤️");
+            alert("Bora hihihihi ❤️");
         }
 
-        // Função para o botão "Não"
-        function onNoClick() {
+        // Função para o botão "Não" quando tocado
+        function onNoTouch() {
             // Mostrar a mensagem "Poxa 😞"
             message.innerHTML = "Poxa 😞";
             message.style.display = "block";
@@ -111,7 +111,7 @@
             moveButton();
         }
 
-        // Função para fazer o botão "Não" fugir do clique
+        // Função para fazer o botão "Não" fugir do toque
         function moveButton() {
             const moveAreaWidth = moveArea.offsetWidth;
             const moveAreaHeight = moveArea.offsetHeight;
@@ -124,14 +124,15 @@
             const maxY = moveAreaHeight - btnHeight;
 
             // Função de movimento rápido do botão
-            btnNo.addEventListener('mouseenter', () => {
-                let x = Math.random() * maxX;
-                let y = Math.random() * maxY;
+            let x = Math.random() * maxX;
+            let y = Math.random() * maxY;
 
-                // Atualizar posição do botão "Não"
-                btnNo.style.left = `${x}px`;
-                btnNo.style.top = `${y}px`;
-            });
+            // Atualizar posição do botão "Não"
+            btnNo.style.left = `${x}px`;
+            btnNo.style.top = `${y}px`;
+
+            // Continuar movendo o botão rapidamente
+            setTimeout(moveButton, 100); // Movimento mais rápido
         }
 
         // Inicializar a posição do botão "Não"
