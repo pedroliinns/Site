@@ -15,6 +15,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden;
         }
         .container {
             background: #fff;
@@ -23,6 +24,7 @@
             padding: 20px;
             max-width: 400px;
             width: 90%;
+            position: relative;
         }
         h1 {
             color: #333;
@@ -39,11 +41,12 @@
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
-            position: relative;
+            position: absolute;
         }
         .btn-yes {
             background-color: #4CAF50;
             color: white;
+            position: static;
         }
         .btn-yes:hover {
             background-color: #45a049;
@@ -66,8 +69,7 @@
     <script>
         const btnNo = document.getElementById('btn-no');
 
-        // Função para mover o botão "Não" para uma posição aleatória
-        btnNo.addEventListener('mouseover', () => {
+        function moveButton() {
             const container = btnNo.parentElement.getBoundingClientRect();
             const btnWidth = btnNo.offsetWidth;
             const btnHeight = btnNo.offsetHeight;
@@ -75,12 +77,15 @@
             const randomX = Math.random() * (container.width - btnWidth);
             const randomY = Math.random() * (container.height - btnHeight);
 
-            btnNo.style.position = 'absolute';
             btnNo.style.left = `${randomX}px`;
             btnNo.style.top = `${randomY}px`;
-        });
+        }
 
-        // Função para quando o botão "Sim" é clicado
+        // Detectar toque ou mouse sobre o botão "Não"
+        btnNo.addEventListener('mouseover', moveButton);
+        btnNo.addEventListener('touchstart', moveButton);
+
+        // Função para o botão "Sim"
         function onYesClick() {
             alert("Você disse SIM! ❤️");
         }
