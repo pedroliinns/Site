@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Você quer casar comigo?</title>
+    <title>Vamos furunfar amanhã, amor?</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,6 +32,7 @@
         .buttons {
             margin-top: 20px;
             position: relative;
+            height: 200px;
         }
         .btn {
             padding: 10px 20px;
@@ -59,7 +60,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Você quer casar comigo?</h1>
+        <h1>Vamos furunfar amanhã, amor?</h1>
         <div class="buttons">
             <button class="btn btn-yes" onclick="onYesClick()">Sim</button>
             <button class="btn btn-no" id="btn-no">Não</button>
@@ -68,26 +69,45 @@
 
     <script>
         const btnNo = document.getElementById('btn-no');
+        const container = btnNo.parentElement;
 
-        function moveButton() {
-            const container = btnNo.parentElement.getBoundingClientRect();
+        function getRandomPosition() {
+            const containerRect = container.getBoundingClientRect();
             const btnWidth = btnNo.offsetWidth;
             const btnHeight = btnNo.offsetHeight;
 
-            const randomX = Math.random() * (container.width - btnWidth);
-            const randomY = Math.random() * (container.height - btnHeight);
+            const maxX = containerRect.width - btnWidth;
+            const maxY = containerRect.height - btnHeight;
 
-            btnNo.style.left = `${randomX}px`;
-            btnNo.style.top = `${randomY}px`;
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            return { x: randomX, y: randomY };
         }
 
-        // Detectar toque ou mouse sobre o botão "Não"
-        btnNo.addEventListener('mouseover', moveButton);
-        btnNo.addEventListener('touchstart', moveButton);
+        function moveButtonIfClose(event) {
+            const pointerX = event.type.includes("touch") ? event.touches[0].clientX : event.clientX;
+            const pointerY = event.type.includes("touch") ? event.touches[0].clientY : event.clientY;
+
+            const btnRect = btnNo.getBoundingClientRect();
+            const distanceX = Math.abs(pointerX - (btnRect.left + btnRect.width / 2));
+            const distanceY = Math.abs(pointerY - (btnRect.top + btnRect.height / 2));
+
+            const threshold = 100; // Distância mínima para fugir
+            if (distanceX < threshold && distanceY < threshold) {
+                const { x, y } = getRandomPosition();
+                btnNo.style.left = `${x}px`;
+                btnNo.style.top = `${y}px`;
+            }
+        }
+
+        // Adicionar eventos para mouse e toque
+        btnNo.addEventListener("mousemove", moveButtonIfClose);
+        btnNo.addEventListener("touchmove", moveButtonIfClose);
 
         // Função para o botão "Sim"
         function onYesClick() {
-            alert("Você disse SIM! ❤️");
+            alert("Hihihi ❤️");
         }
     </script>
 </body>
