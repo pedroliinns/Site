@@ -3,112 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vamos furunfar amanhã, amor?</title>
+    <title>Bora pra uma pousada amanhã?</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f9f9f9;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            text-align: center;
             overflow: hidden;
         }
+
         .container {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 400px;
-            width: 90%;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
         h1 {
-            color: #333;
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
-        .buttons {
-            margin-top: 20px;
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            width: 70vw; /* Área para os botões */
+            height: 60vh; /* Área para os botões */
+            background-color: white;
+            border: 2px solid #000;
+            border-radius: 10px;
+            padding: 20px;
             position: relative;
-            height: 200px;
         }
+
+        /* Estilo comum para os botões */
         .btn {
+            font-size: 1rem;
             padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
+        }
+
+        .btn-yes {
+            background: #4CAF50;
+            color: white;
+            margin-right: 20px;
+        }
+
+        .btn-yes:hover {
+            background: #45a049;
+        }
+
+        .btn-no {
+            background: #ff6b6b;
+            color: white;
+            width: 60px;
+            height: 30px;
+            font-size: 0.8rem;
+            transition: all 0.2s ease-out;
             position: absolute;
         }
-        .btn-yes {
-            background-color: #4CAF50;
-            color: white;
-            position: static;
-        }
-        .btn-yes:hover {
-            background-color: #45a049;
-        }
-        .btn-no {
-            background-color: #f44336;
-            color: white;
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #333;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Vamos furunfar amanhã, amor?</h1>
-        <div class="buttons">
+        <h1>Bora pra uma pousada amanhã?</h1>
+        <div class="buttons-container">
             <button class="btn btn-yes" onclick="onYesClick()">Sim</button>
-            <button class="btn btn-no" id="btn-no">Não</button>
+            <button class="btn btn-no" id="btn-no" onclick="onNoClick()">Não</button>
         </div>
+        <div class="message" id="message"></div>
     </div>
 
     <script>
         const btnNo = document.getElementById('btn-no');
-        const container = btnNo.parentElement;
-
-        function getRandomPosition() {
-            const containerRect = container.getBoundingClientRect();
-            const btnWidth = btnNo.offsetWidth;
-            const btnHeight = btnNo.offsetHeight;
-
-            const maxX = containerRect.width - btnWidth;
-            const maxY = containerRect.height - btnHeight;
-
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
-
-            return { x: randomX, y: randomY };
-        }
-
-        function moveButtonIfClose(event) {
-            const pointerX = event.type.includes("touch") ? event.touches[0].clientX : event.clientX;
-            const pointerY = event.type.includes("touch") ? event.touches[0].clientY : event.clientY;
-
-            const btnRect = btnNo.getBoundingClientRect();
-            const distanceX = Math.abs(pointerX - (btnRect.left + btnRect.width / 2));
-            const distanceY = Math.abs(pointerY - (btnRect.top + btnRect.height / 2));
-
-            const threshold = 100; // Distância mínima para fugir
-            if (distanceX < threshold && distanceY < threshold) {
-                const { x, y } = getRandomPosition();
-                btnNo.style.left = `${x}px`;
-                btnNo.style.top = `${y}px`;
-            }
-        }
-
-        // Adicionar eventos para mouse e toque
-        btnNo.addEventListener("mousemove", moveButtonIfClose);
-        btnNo.addEventListener("touchmove", moveButtonIfClose);
+        const message = document.getElementById("message");
+        const moveArea = document.querySelector('.buttons-container');
 
         // Função para o botão "Sim"
         function onYesClick() {
-            alert("Hihihi ❤️");
+            alert("Bora então hihihi ❤️");
         }
+
+        // Função para o botão "Não"
+        function onNoClick() {
+            // Mostrar a mensagem "Poxa 😞"
+            message.innerHTML = "Poxa 😞";
+            message.style.display = "block";
+
+            // Fazer o botão "Não" começar a fugir
+            moveButton();
+        }
+
+        // Função para fazer o botão "Não" fugir do clique
+        function moveButton() {
+            const moveAreaWidth = moveArea.offsetWidth;
+            const moveAreaHeight = moveArea.offsetHeight;
+
+            const btnWidth = btnNo.offsetWidth;
+            const btnHeight = btnNo.offsetHeight;
+
+            // Limites de movimento dentro da área
+            const maxX = moveAreaWidth - btnWidth;
+            const maxY = moveAreaHeight - btnHeight;
+
+            // Função de movimento rápido do botão
+            btnNo.addEventListener('mouseenter', () => {
+                let x = Math.random() * maxX;
+                let y = Math.random() * maxY;
+
+                // Atualizar posição do botão "Não"
+                btnNo.style.left = `${x}px`;
+                btnNo.style.top = `${y}px`;
+            });
+        }
+
+        // Inicializar a posição do botão "Não"
+        moveButton();
     </script>
 </body>
 </html>
