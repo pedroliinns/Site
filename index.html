@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vamos furunfar amanhã?</title>
+    <title>Você quer casar comigo?</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -56,7 +56,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Vamos furunfar amanhã?</h1>
+        <h1>Você quer casar comigo?</h1>
         <div class="buttons">
             <button class="btn btn-yes" onclick="onYesClick()">Sim</button>
             <button class="btn btn-no" id="btn-no">Não</button>
@@ -72,4 +72,18 @@
             const btnWidth = btnNo.offsetWidth;
             const btnHeight = btnNo.offsetHeight;
 
-            const randomX = Math.random() * (container.width
+            const randomX = Math.random() * (container.width - btnWidth);
+            const randomY = Math.random() * (container.height - btnHeight);
+
+            btnNo.style.position = 'absolute';
+            btnNo.style.left = `${randomX}px`;
+            btnNo.style.top = `${randomY}px`;
+        });
+
+        // Função para quando o botão "Sim" é clicado
+        function onYesClick() {
+            alert("Você disse SIM! ❤️");
+        }
+    </script>
+</body>
+</html>
