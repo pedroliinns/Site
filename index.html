@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bora pra uma pousada amanhã?</title>
+    <title>Convite</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -33,7 +33,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: row;
             width: 70vw; /* Área para os botões */
             height: 60vh; /* Área para os botões */
             background-color: white;
@@ -69,8 +68,8 @@
             width: 60px;
             height: 30px;
             font-size: 0.8rem;
-            transition: all 0.2s ease-out;
             position: absolute;
+            transition: all 0.2s ease-out;
         }
 
         .message {
@@ -83,7 +82,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Convite</h1>
+        <h1>BORA PRA UMA POUSADA AMANHÃ?</h1>
         <div class="buttons-container">
             <button class="btn btn-yes" onclick="onYesClick()">Sim</button>
             <button class="btn btn-no" id="btn-no" ontouchstart="onNoTouch()">Não</button>
@@ -98,13 +97,13 @@
 
         // Função para o botão "Sim"
         function onYesClick() {
-            alert("Bora hihihihi ❤️");
+            alert("Hihihi ❤️");
         }
 
         // Função para o botão "Não" quando tocado
         function onNoTouch() {
             // Mostrar a mensagem "Poxa 😞"
-            message.innerHTML = "Poxa 😞";
+            message.innerHTML = "Poxa, boraaaaa 😞";
             message.style.display = "block";
 
             // Fazer o botão "Não" começar a fugir
