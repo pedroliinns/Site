@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Um dia vou comer teu c#zinho?</title>
+    <title>Vamos furunfar amanhã?</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,6 +29,7 @@
         }
         .buttons {
             margin-top: 20px;
+            position: relative;
         }
         .btn {
             padding: 10px 20px;
@@ -38,6 +39,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
         }
         .btn-yes {
             background-color: #4CAF50;
@@ -49,23 +51,25 @@
         .btn-no {
             background-color: #f44336;
             color: white;
-            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Um dia vou comer teu c#zinho?</h1>
+        <h1>Vamos furunfar amanhã?</h1>
         <div class="buttons">
             <button class="btn btn-yes" onclick="onYesClick()">Sim</button>
-            <button class="btn btn-no" disabled>Não</button>
+            <button class="btn btn-no" id="btn-no">Não</button>
         </div>
     </div>
 
     <script>
-        function onYesClick() {
-            alert("Que safada, disse sim!! 👉👈 ");
-        }
-    </script>
-</body>
-</html>
+        const btnNo = document.getElementById('btn-no');
+
+        // Função para mover o botão "Não" para uma posição aleatória
+        btnNo.addEventListener('mouseover', () => {
+            const container = btnNo.parentElement.getBoundingClientRect();
+            const btnWidth = btnNo.offsetWidth;
+            const btnHeight = btnNo.offsetHeight;
+
+            const randomX = Math.random() * (container.width
